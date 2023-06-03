@@ -179,6 +179,7 @@ def main():
             torch_dtype=dict_precisions[args.precision],
             trust_remote_code=args.trust_remote_code,
             use_auth_token=args.use_auth_token,
+            low_cpu_mem_usage=True,
         )
         tokenizer = AutoTokenizer.from_pretrained(
             args.model,
