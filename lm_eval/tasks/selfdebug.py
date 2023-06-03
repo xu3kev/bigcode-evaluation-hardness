@@ -61,7 +61,6 @@ class SelfDebug(Task):
         
         #ret = fewshot_code + extract_comments  + previous_code + "\nFeedback: The code above is wrong. Please fix it.\ndef " + doc["entry_point"] + "("
         ret = fewshot_code + extract_comments  + previous_code + "\nFeedback: The code above is "
-        print(ret)
         
         return ret
 
@@ -79,7 +78,6 @@ class SelfDebug(Task):
         WARNING: the decoded_string *must not* include the prompt, which may have stop tokens
         itself.
         """
-        print(decoded_string)
         min_stop_index = len(decoded_string)
         for stop_token in stop_tokens:
             stop_index = decoded_string.find(stop_token)
@@ -101,7 +99,6 @@ class SelfDebug(Task):
             if "\nFeedback" in generation:
                 #entry_point = self.dataset["test"][idx]["entry_point"]
                 ret = generation.split("\n",1)[-1].split("\nFeedback",1)[0]
-                print(ret)
                 return ret
 
         import json
@@ -109,7 +106,6 @@ class SelfDebug(Task):
             data = json.loads(f.read())
         task_id = int(self.dataset["test"][idx]["task_id"].split("/")[-1])
         ret = data[task_id][0]
-        print(ret)
         return ret
 
     def process_results(self, generations, references):
